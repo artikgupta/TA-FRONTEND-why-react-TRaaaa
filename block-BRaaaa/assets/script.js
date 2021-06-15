@@ -15,7 +15,7 @@ input.addEventListener("keyup", (event)=>{
         console.log(event.target.value)
         allMovies.push({
             name:event.target.value,
-            watched:"watched"
+            watched:false
         })
 
     }
@@ -34,6 +34,7 @@ createMovieUI()
 
 function handleChange(event){
     let id = event.target.id;
+    allMovies[id].watched = !allMovies[id].watched
     createMovieUI()
     }
 
@@ -43,19 +44,18 @@ function createMovieUI(){
         let li = document.createElement("li")
         let text = document.createElement("span")
         text.innerText = ele.name
-        let checked = document.createElement("span")
-        // input.type= "checkbox";
-        // input.checked= 
-        checked.innerText= ele.watched
+        let input = document.createElement("input")
+        input.type= "checkbox";
+        input.checked= ele.watched
         input.id=i
-        checked.addEventListener("change",handleChange)
+        input.addEventListener("change",handleChange)
         let span = document.createElement("span")
         span.innerText="X"
         span.setAttribute("data-id", i)
     
         span.addEventListener("click",deleteMovie)
 
-        li.append(checked,text,span)
+        li.append(input,text,span)
         rootElm.append(li)
     
     })
