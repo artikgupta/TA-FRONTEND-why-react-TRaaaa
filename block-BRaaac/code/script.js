@@ -1,0 +1,77 @@
+let input = document.querySelector(`input[type="text"]`)
+
+let rootElm = document.querySelector(".movie_lists")
+
+
+let allMovies =[]
+
+function elm(type,attr ={}){
+
+    let element = document.createElement(type)
+
+    for (let key in attr){
+        if(key.startsWith("data-")){
+            element.setAttribute(key,attr[key])
+        }else{
+            element[key] = attr[key]
+        }
+    }
+
+    return element;
+
+}
+
+
+
+input.addEventListener("keyup", (event)=>{
+
+    if(event.keyCode===13){
+        console.log(event.target.value)
+        allMovies.push({
+            name:event.target.value,
+            watched:false
+        })
+
+    }
+
+    createMovieUI()
+
+})
+
+
+function deleteMovie(event  ){
+let id = event.target.dataset.id;
+allMovies.splice(id,1)
+createMovieUI()
+}
+
+
+function handleChange(event){
+    let id = event.target.id;
+    allMovies[id].watched = !allMovies[id].watched
+    createMovieUI()
+    }
+
+function createMovieUI(){
+    rootElm.innerHTML =""
+    allMovies.forEach((ele,i)=>{
+        let li = elm("li")
+        let text = elm("span")
+        text.innerText = ele.name
+        let input = elm("input")
+        input.type= "checkbox";
+        input.checked= ele.watched
+        input.id=i
+        input.addEventListener("change",handleChange)
+        let span = document.createElement("span")
+        span.innerText="X"
+        span.setAttribute("data-id", i)
+    
+        span.addEventListener("click",deleteMovie)
+
+        li.append(input,text,span)
+        rootElm.append(li)
+    
+    })
+   
+}
