@@ -58,16 +58,21 @@ createMovieUI()
 
 
 function handleChange(event){
-    let id = event.target.id;
+    let id = event.target.dataset.id;
+    console.log(id)
     allMovies[id].watched = !allMovies[id].watched
     createMovieUI()
     }
 
-function createMovieUI(){
+
+
+    function createMovieUI(){
     rootElm.innerHTML =""
     allMovies.forEach((ele,i)=>{
-        let btn =  elm("button",{id:i},ele.watched ? "Watched" : "To Watch")
-        btn.addEventListener("change",handleChange)
+        let btn =  elm("button", {"data-id":i}, ele.watched ? "Watched" : "To Watch")
+
+        btn.addEventListener("click",handleChange)
+
         let li = elm("li", null, elm("label",{for:i}, ele.name),btn)
 
         // let text = elm("span")
