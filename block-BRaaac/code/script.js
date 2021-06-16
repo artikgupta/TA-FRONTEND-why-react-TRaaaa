@@ -5,7 +5,7 @@ let rootElm = document.querySelector(".movie_lists")
 
 let allMovies =[]
 
-function elm(type,attr ={}){
+function elm(type, attr ={},  ...children){
 
     let element = document.createElement(type)
 
@@ -16,6 +16,17 @@ function elm(type,attr ={}){
             element[key] = attr[key]
         }
     }
+
+    children.forEach((child)=>{
+    if(typeof child ==="object"){
+        element.append(child)
+    }
+
+    if(typeof child === "string"){
+        let node = document.createTextNode(child);
+        element.append(node)
+    }
+})
 
     return element;
 
@@ -55,21 +66,21 @@ function handleChange(event){
 function createMovieUI(){
     rootElm.innerHTML =""
     allMovies.forEach((ele,i)=>{
-        let li = elm("li")
-        let text = elm("span")
-        text.innerText = ele.name
-        let input = elm("input")
-        input.type= "checkbox";
-        input.checked= ele.watched
-        input.id=i
-        input.addEventListener("change",handleChange)
-        let span = document.createElement("span")
-        span.innerText="X"
-        span.setAttribute("data-id", i)
-    
-        span.addEventListener("click",deleteMovie)
+        let btn =  elm("button",{id:i},ele.watched ? "Watched" : "To Watch")
+        btn.addEventListener("change",handleChange)
+        let li = elm("li", null, elm("label",{for:i}, ele.name),btn)
 
-        li.append(input,text,span)
+        // let text = elm("span")
+        // text.innerText = 
+        // let button = elm("button")
+        // button.id = i
+        // button.innerText = 
+        // let span = document.createElement("span")
+        // span.innerText="X"
+        // span.setAttribute("data-id", i)
+        // span.addEventListener("click",deleteMovie)
+        // li.append(button,text,span)
+
         rootElm.append(li)
     
     })
