@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+   let root = document.getElementById("root") 
+
+
+   let fruits = [
+  { id: 'apple', value: '🍎 apple' },
+  { id: 'orange', value: '🍊 orange' },
+  { id: 'grape', value: '🍇 grape' },
+  { id: 'pear', value: '🍐 pear' },
+];
+
+
+function SelectFruit(){
+    return(
+        fruits.map((v)=>
+         <button key={v.id} onClick={()=>alert(`${v.value}`)}>{v.value}</button>
+        )
+    )
+}
+
+
+function ClickEvent(){
+    return(
+        <button onClick={()=>alert("Hello React Event")}>Click Me</button>
+    )
+}
+
+function MultipleAlert(){
+    return(
+        <button onClick={()=>{alert("Babel helps in writing JSX")
+            alert("To learn React use https://reactjs.org")
+            alert("React and ReactDOM works together")}
+        }>Click Me</button>
+    )
+}
+
+function ClickNames(){
+let names=[`Arya`, `John` , `Bran`]
+    return(
+   names.map((name)=>{
+return  <button onClick={()=>alert(`${name}`)} >Click {`${name}`}</button>
+  })
+    )
+
+}
+
+
+   function App(){
+       return(
+<>
+           <SelectFruit/>
+           <ClickEvent/>
+           <MultipleAlert/>
+           <ClickNames/>
+  </>
+       )
+   }
+
+
+
+   ReactDOM.render(<App/>,root)
+
+ </script>
+    
+</body>
+</html>
