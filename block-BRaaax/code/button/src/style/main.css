@@ -1,0 +1,23 @@
+.small {
+    font-size: small;
+}
+
+.large {
+    font-size: larger;
+}
+
+.medium {
+    font-size: medium;
+}
+
+.primary {
+    background-color: aqua;
+}
+
+.secondary {
+    background-color: cadetblue;
+}
+
+.tertiary {
+    background-color: chartreuse;
+}
